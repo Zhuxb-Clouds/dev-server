@@ -1,3 +1,4 @@
-fastapi
-uvicorn
-pydub
+fastapi==0.103.2
+uvicorn==0.23.2
+pydub==0.25.1 
+scipy==1.11.3
