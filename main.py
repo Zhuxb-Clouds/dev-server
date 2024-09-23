@@ -1,13 +1,14 @@
 from fastapi import FastAPI, HTTPException
-
+from constants import GAME_PATH
 import os
 from typing import Dict, Tuple
 from audio_process import AudioProcess
-
+from pydub import AudioSegment
 
 app = FastAPI()
 
-
+INPUT_PATH = os.path.join(GAME_PATH, "voice")
+OUTPUT_PATH = os.path.join(GAME_PATH, "voice_fx")
 @app.get("/getVoice")
 async def get_voice(
     fileName: str,
@@ -48,27 +49,27 @@ async def get_voice(
             audio_process.pan(pan)
         if gain != 0:
             print(f"gain: {gain}")
-            audio_process.apply_gain(gain)
+            audio_process.gain(gain)
         if fadeIn != 0:
             print(f"fadeIn: {fadeIn}")
-            audio_process.fade_in(fadeIn)
+            audio_process.fadeIn(fadeIn)
         if fadeOut != 0:
             print(f"fadeOut: {fadeOut}")
-            audio_process.fade_out(fadeOut)
+            audio_process.fadeOut(fadeOut)
         if highPass:
             print(f"highPass: {highPass}")
-            audio_process.high_pass_filter(highPass)
+            audio_process.highPass(highPass)
         if lowPass:
             print(f"lowPass: {lowPass}")
-            audio_process.low_pass_filter(lowPass)
+            audio_process.lowPass(lowPass)
         if telephone:
             print(f"telephone")
-            audio_process.apply_telephone_effect()
+            audio_process.telephone()
         # 保存修改后的音频文件
         audio_process.audio.export(output_file_path, format="flac")
 
         # 更新缓存
-        cache[fileName] = (pan, gain)
+        # cache[fileName] = (pan, gain)
 
         return {
             "message": "File processed successfully",

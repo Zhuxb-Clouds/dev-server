@@ -8,6 +8,8 @@ from constants import GAME_PATH
 SCRIPTS_PATH = [
     "script.rpy",
     "script2nd.rpy",
+    "/script/reflection.rpy",
+    "/script/afterStory.rpy",
 ]
 
 FOLD_PATH = GAME_PATH
