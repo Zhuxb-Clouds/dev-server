@@ -13,7 +13,9 @@ def apply_voice_fx():
     voice_object_list = get_voice_object()
 
     for voice_obj in voice_object_list:
-
+        if len(voice_obj.attr)==0:
+            print(f"Skipping {voice_obj.voice} because it has attributes.")
+            continue
         input_file_path = os.path.join(INPUT_PATH, voice_obj.voice)
         output_file_path = os.path.join(OUTPUT_PATH, voice_obj.voice)
         # 检查输入文件是否存在
